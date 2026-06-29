@@ -39,16 +39,11 @@ class SalesOrderRepository:
         SELECT
             sale.C_ID,
             sale.C_NUMBER,
-            sale.C_DOCUMENTLASTUPDATEDON,
-            sale.c_d_processedOnce,
-            stat.C_CODE
-        FROM T_SALESORDER sale WITH (NOLOCK)
-        INNER JOIN T_SALESORDERWORKFLOWSTATUS stat WITH (NOLOCK)
-            ON sale.C_WORKFLOWSTATUS = stat.C_ID
+            sale.C_DOCUMENTLASTUPDATEDON
+        FROM T_SALESQUOTATION sale WITH (NOLOCK)
         WHERE
-            stat.C_CODE NOT IN ('SHIPPED','WOFF')
-            AND sale.C_DOCUMENTLASTUPDATEDON > ?
-            AND sale.C_DATE > '2026-06-23 11:46:00'
+             sale.C_DOCUMENTLASTUPDATEDON > '2026-06-29 10:00:00'
+            AND sale.C_DATE > ?
         ORDER BY sale.C_DOCUMENTLASTUPDATEDON
         """
         def operation():
@@ -67,8 +62,8 @@ class SalesOrderRepository:
                     id=row.C_ID,
                     number=row.C_NUMBER,
                     workflow_status=row.C_CODE,
-                    last_updated=row.C_DOCUMENTLASTUPDATEDON,
-                    processed_once=row.c_d_processedOnce,
+                    last_updated=row.C_DOCUMENTLASTUPDATEDON
+                    #processed_once=row.c_d_processedOnce,
                 )
                 for row in rows
             ]

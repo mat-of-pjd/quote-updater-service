@@ -7,4 +7,4 @@ class SalesOrder:
     number: str
     workflow_status: str
     last_updated: datetime
-    processed_once: datetime | None
+#    processed_once: datetime | None

@@ -18,7 +18,7 @@ def setup_logging():
 
     # File
     file_handler = RotatingFileHandler(
-        "logs/order_watcher.log",
+        "logs/quote_watcher.log",
         maxBytes=5_000_000,
         backupCount=5,
         encoding="utf-8"
