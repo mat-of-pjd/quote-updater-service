@@ -42,8 +42,7 @@ class SalesOrderRepository:
             sale.C_DOCUMENTLASTUPDATEDON
         FROM T_SALESQUOTATION sale WITH (NOLOCK)
         WHERE
-             sale.C_DOCUMENTLASTUPDATEDON > '2026-06-29 10:00:00'
-            AND sale.C_DATE > ?
+             sale.C_DOCUMENTLASTUPDATEDON > ?
         ORDER BY sale.C_DOCUMENTLASTUPDATEDON
         """
         def operation():
@@ -61,7 +60,7 @@ class SalesOrderRepository:
                 SalesOrder(
                     id=row.C_ID,
                     number=row.C_NUMBER,
-                    workflow_status=row.C_CODE,
+                    #workflow_status=row.C_CODE,
                     last_updated=row.C_DOCUMENTLASTUPDATEDON
                     #processed_once=row.c_d_processedOnce,
                 )

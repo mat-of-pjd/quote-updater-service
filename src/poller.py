@@ -20,24 +20,14 @@ class Poller:
         while True:
             try:
                 changes = (
-                    self.repository
-                    .get_changes(last_seen)
+                    self.repository.get_changes(last_seen)
                 )
                 latest = last_seen
                 for order in changes:
-                    self.processor.process(
-                        order
-                    )
-                    if (
-                        order.last_updated
-                        > latest
-                    ):
-                        latest = (
-                            order.last_updated
-                        )
-                self.checkpoint.save(
-                    latest
-                )
+                    self.processor.process(order)
+                    if (order.last_updated > latest):
+                        latest = (order.last_updated)
+                self.checkpoint.save(latest)
                 last_seen = latest
             except Exception:
                 logging.exception(

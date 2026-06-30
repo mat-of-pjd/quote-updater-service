@@ -32,7 +32,7 @@ class CheckpointManager:
             ValueError
         ):
             return datetime(2000, 1, 1)
-        
+
     def save(self, timestamp):
         self.filename.parent.mkdir(
             parents=True,
